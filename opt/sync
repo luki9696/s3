@@ -5,6 +5,8 @@ if [ -n "$AWS_BUCKET" ]; then
 [default]
 access_key = ${AWS_ACCESS_KEY}
 secret_key = ${AWS_SECRET_KEY}
+host_base = storage.googleapis.com
+host_bucket = ${AWS_BUCKET}.storage.googleapis.com
 EOF
   if [ -d world ]; then
     s3cmd sync world/ s3://${AWS_BUCKET}/world/
