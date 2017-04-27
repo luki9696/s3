@@ -9,11 +9,29 @@ host_base = storage.googleapis.com
 host_bucket = ${AWS_BUCKET}.storage.googleapis.com
 EOF
   if [ -d world ]; then
-    s3cmd sync world/ s3://${AWS_BUCKET}/world/
+    s3cmd sync world/ s3://${AWS_BUCKET}/minecraft/world/
   else
     mkdir -p world
     cd world
-    s3cmd get --recursive s3://${AWS_BUCKET}/world/
+    s3cmd get --recursive s3://${AWS_BUCKET}/minecraft/world/
+    cd ..
+  fi
+  
+  if [ -d world_the_end ]; then
+    s3cmd sync world_the_end/ s3://${AWS_BUCKET}/minecraft/world_the_end/
+  else
+    mkdir -p world_the_end
+    cd world_the_end
+    s3cmd get --recursive s3://${AWS_BUCKET}/minecraft/world_the_end/
+    cd ..
+  fi
+  
+  if [ -d world_nether ]; then
+    s3cmd sync world_nether/ s3://${AWS_BUCKET}/minecraft/world_nether/
+  else
+    mkdir -p world_nether
+    cd world_nether
+    s3cmd get --recursive s3://${AWS_BUCKET}/minecraft/world_nether/
     cd ..
   fi
   rm .s3cfg
