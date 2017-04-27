@@ -58,7 +58,7 @@ echo "done"
 
 
 echo -n "-----> Installing Minecraft "
-cd $BUILD_DIR
+cd mine
 if [ -n "$AWS_BUCKET" ]; then
   cat << EOF > .s3cfg
 [default]
@@ -71,6 +71,7 @@ EOF
   rm .s3cfg
 fi
 cd ..
+mv mine/ $BUILD_DIR
 echo "done"
 
 if [ -n "${MINECRAFT_EULA:-""}" ]; then
