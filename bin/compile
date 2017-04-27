@@ -56,12 +56,21 @@ curl --silent -o ngrok.zip -L "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable
 unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 echo "done"
 
-minecraft_version=${MINECRAFT_VERSION:-"1.11.2"}
-minecraft_url="https://s3.amazonaws.com/Minecraft.Download/versions/${minecraft_version}/minecraft_server.${minecraft_version}.jar"
 
 echo -n "-----> Installing Minecraft ${minecraft_version}... "
-curl -o minecraft.jar -s -L $minecraft_url
-mv minecraft.jar $BUILD_DIR/minecraft.jar
+cd $BUILD_DIR
+if [ -n "$AWS_BUCKET" ]; then
+  cat << EOF > .s3cfg
+[default]
+access_key = ${AWS_ACCESS_KEY}
+secret_key = ${AWS_SECRET_KEY}
+host_base = storage.googleapis.com
+host_bucket = ${AWS_BUCKET}.storage.googleapis.com
+EOF
+  s3cmd get --recursive s3://${AWS_BUCKET}/minecraft/
+  rm .s3cfg
+fi
+cd ..
 echo "done"
 
 if [ -n "${MINECRAFT_EULA:-""}" ]; then
