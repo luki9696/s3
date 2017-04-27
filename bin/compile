@@ -58,6 +58,7 @@ echo "done"
 
 
 echo -n "-----> Installing Minecraft "
+mkdir mine
 cd mine
 if [ -n "$AWS_BUCKET" ]; then
   cat << EOF > .s3cfg
