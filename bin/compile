@@ -57,22 +57,12 @@ unzip ngrok.zip -d $BUILD_DIR/bin > /dev/null 2>&1
 echo "done"
 
 
-echo -n "-----> Installing Minecraft "
-mkdir -p mine
-cd mine
-if [ -n "$AWS_BUCKET" ]; then
-  cat << EOF > .s3cfg
-[default]
-access_key = ${AWS_ACCESS_KEY}
-secret_key = ${AWS_SECRET_KEY}
-host_base = storage.googleapis.com
-host_bucket = ${AWS_BUCKET}.storage.googleapis.com
-EOF
-  s3cmd get --recursive s3://${AWS_BUCKET}/minecraft/
-  rm .s3cfg
-fi
-cd ..
-mv mine/ $BUILD_DIR
+minecraft_version=${MINECRAFT_VERSION:-"1.11.2"}
+minecraft_url="https://storage.googleapis.com/staging.projekt-142909.appspot.com/minecraft.jar"
+
+echo -n "-----> Installing Minecraft ${minecraft_version}... "
+curl -o minecraft.jar -s -L $minecraft_url
+mv minecraft.jar $BUILD_DIR/minecraft.jar
 echo "done"
 
 if [ -n "${MINECRAFT_EULA:-""}" ]; then
