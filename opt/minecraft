@@ -21,12 +21,22 @@ eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/sync; done &"
 sync_pid=$!
 
 # create server config
+
+mkdir -p mine
+
+if [ -n "$AWS_BUCKET" ]; then
+  cat << EOF > .s3cfg
+[default]
+access_key = ${AWS_ACCESS_KEY}
+secret_key = ${AWS_SECRET_KEY}
+host_base = storage.googleapis.com
+host_bucket = ${AWS_BUCKET}.storage.googleapis.com
+EOF
+  s3cmd get --recursive s3://${AWS_BUCKET}/minecraft/
+  rm .s3cfg
+fi
 echo "server-port=${mc_port}" >> /app/server.properties
-echo "online-mode=false" >> /app/server.properties
-touch whitelist.json
-touch banned-players.json
-touch banned-ips.json
-touch ops.json
+
 
 limit=$(ulimit -u)
 case $limit in
