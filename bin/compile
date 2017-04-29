@@ -34,13 +34,13 @@ mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
 cd $APT_CACHE_DIR/archives/
-wget http://ftp.debian.org/debian/pool/main/s/s3fs-fuse/s3fs_1.80-2_amd64.deb
+
 dpkg -x s3fs_1.80-2_amd64.deb $BUILD_DIR/.apt/
 
 
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano build-essential libfuse-dev fuse-utils libcurl4-openssl-dev libxml2-dev mime-support | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall s3fs nano build-essential libfuse-dev fuse-utils libcurl4-openssl-dev libxml2-dev mime-support | indent
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
 export PATH="\$HOME/.apt/usr/bin:\$PATH"
