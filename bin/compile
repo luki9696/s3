@@ -57,4 +57,4 @@ mkdir -p $BUILD_DIR/bin
 [ ! -f $BUILD_DIR/mount ] && cp $OPT_DIR/mount $BUILD_DIR
 
 
-chmod +x $BUILD_DIR/bin/sync
+chmod +x $BUILD_DIR/bin/mount
