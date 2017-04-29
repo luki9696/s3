@@ -34,9 +34,8 @@ mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
 cd $APT_CACHE_DIR/archives/
-
-dpkg -x s3fs_1.80-2_amd64.deb $BUILD_DIR/.apt/
-
+wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/s3fs/s3fs-1.40.tar.gz
+dpkg -x s3fs-1.40.tar.gz $BUILD_DIR/.apt/
 
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
