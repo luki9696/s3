@@ -35,7 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano gcsfuse | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall nano | indent
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
 export PATH="\$HOME/.apt/usr/bin:\$PATH"
@@ -50,6 +50,10 @@ EOF
 for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
   dpkg -x $DEB $BUILD_DIR/.apt/
 done
+
+cd $APT_CACHE_DIR/archives/
+wget http://ftp.debian.org/debian/pool/main/s/s3fs-fuse/s3fs_1.80-2_amd64.deb
+dpkg -x s3fs_1.80-2_amd64.deb $BUILD_DIR/.apt/
 
 
 mkdir -p $BUILD_DIR/bin
