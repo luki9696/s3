@@ -24,6 +24,10 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 OPT_DIR=$BP_DIR/../opt/
 
+export GCSFUSE_REPO=gcsfuse-`lsb_release -c -s`
+echo "deb http://packages.cloud.google.com/apt $GCSFUSE_REPO main" | sudo tee /etc/apt/sources.list.d/gcsfuse.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
 export_env_dir $3
 
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
@@ -35,7 +39,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing s3cmd... "
 apt-get $APT_OPTIONS update | indent
-apt-get $APT_OPTIONS -y --force-yes -d install --reinstall php5-gd libapache2-mod-php5.6 | indent
+apt-get $APT_OPTIONS -y --force-yes -d install --reinstall gcsfuse | indent
 mkdir -p $BUILD_DIR/.profile.d
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
 export PATH="\$HOME/.apt/usr/bin:\$PATH"
