@@ -56,6 +56,6 @@ done
 mkdir -p $BUILD_DIR/bin
 
 [ ! -f $BUILD_DIR/mount ] && cp $OPT_DIR/mount $BUILD_DIR
-
+[ ! -f $BUILD_DIR/index.php ] && cp $OPT_DIR/index.php $BUILD_DIR
 
 chmod +x $BUILD_DIR/mount
