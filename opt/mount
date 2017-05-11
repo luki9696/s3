@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+while 1 {
+sleep 60
 if [ -n "$AWS_BUCKET" ]; then
   cat << EOF > .s3cfg
 [default]
@@ -10,3 +11,4 @@ host_bucket = ${AWS_BUCKET}.storage.googleapis.com
 EOF
   rm .s3cfg
 fi
+}
