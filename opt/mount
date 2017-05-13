@@ -13,3 +13,4 @@ EOF
   fi
   rm .s3cfg
 fi
+exit
