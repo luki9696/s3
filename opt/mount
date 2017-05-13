@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -n "$AWS_BUCKET" ]; then
+if [ -n sync_on ]; then
   cat << EOF > .s3cfg
 [default]
 access_key = ${AWS_ACCESS_KEY}
@@ -12,5 +12,5 @@ EOF
     s3cmd sync sync/ s3://${AWS_BUCKET}/sync/
   fi
   rm .s3cfg
+  rm -r sync_on
 fi
-exit
