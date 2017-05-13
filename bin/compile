@@ -61,6 +61,5 @@ mkdir -p $BUILD_DIR/bin
 chmod +x $BUILD_DIR/mount
 
 echo "Starting sync..."
-bin/sync
 eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; /app/mount; done &"
 sync_pid=$!
