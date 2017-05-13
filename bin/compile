@@ -53,10 +53,14 @@ for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
 done
 
 
+
 mkdir -p $BUILD_DIR/bin
 
-[ ! -f $BUILD_DIR/mount ] && cp $OPT_DIR/mount $BUILD_DIR
+[ ! -f $BUILD_DIR/synchro ] && cp $OPT_DIR/synchro $BUILD_DIR
 
-chmod +x $BUILD_DIR/mount
+chmod +x $BUILD_DIR/synchro
 
+cd $BUILD_DIR
+mkdir sync
+eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/synchro; done &"
 
