@@ -8,7 +8,7 @@ secret_key = ${AWS_SECRET_KEY}
 host_base = storage.googleapis.com
 host_bucket = ${AWS_BUCKET}.storage.googleapis.com
 EOF
-  if [ -d sync ]; then
+  if [ -d sync_on ]; then
     s3cmd sync sync/ s3://${AWS_BUCKET}/sync/
   fi
   rm .s3cfg
