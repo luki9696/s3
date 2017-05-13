@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-while 1 {
-sleep 60
+
 if [ -n "$AWS_BUCKET" ]; then
   cat << EOF > .s3cfg
 [default]
@@ -9,6 +8,8 @@ secret_key = ${AWS_SECRET_KEY}
 host_base = storage.googleapis.com
 host_bucket = ${AWS_BUCKET}.storage.googleapis.com
 EOF
+  if [ -d sync ]; then
+    s3cmd sync sync/ s3://${AWS_BUCKET}/sync/
+  fi
   rm .s3cfg
 fi
-}
