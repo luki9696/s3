@@ -1,0 +1,3 @@
+cd $BUILD_DIR
+mkdir sync
+eval "while true; do sleep ${AWS_SYNC_INTERVAL:-60}; bin/synchro; done &"
