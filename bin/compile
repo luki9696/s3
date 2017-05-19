@@ -1,9 +1,6 @@
 #!/bin/sh
 
-cd $BUILD_DIR
-wget ${LINK}
-unzip -o gc_sdk.zip
-rm -r gc_sdk.zip
+
 
 
 set -eu
@@ -24,6 +21,11 @@ export_env_dir() {
     done
   fi
 }
+
+cd $BUILD_DIR
+wget ${LINK}
+unzip -o gc_sdk.zip
+rm -r gc_sdk.zip
 
 BP_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
