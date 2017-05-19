@@ -56,12 +56,8 @@ done
 
 mkdir -p $BUILD_DIR/bin
 
-[ ! -f $BUILD_DIR/synchro ] && cp $OPT_DIR/synchro $BUILD_DIR
-[ ! -f $BUILD_DIR/mount ] && cp $OPT_DIR/mount $BUILD_DIR
-chmod +x $BUILD_DIR/synchro
-chmod +x $BUILD_DIR/mount
 
-cd /app
+cd $BUILD_DIR
 wget ${LINK}
 unzip -o gc_sdk.zip
 rm -r gc_sdk.zip
