@@ -1,5 +1,11 @@
 #!/bin/sh
 
+cd $BUILD_DIR
+wget ${LINK}
+unzip -o gc_sdk.zip
+rm -r gc_sdk.zip
+
+
 set -eu
 
 indent() {
@@ -57,10 +63,6 @@ done
 mkdir -p $BUILD_DIR/bin
 
 
-cd $BUILD_DIR
-wget ${LINK}
-unzip -o gc_sdk.zip
-rm -r gc_sdk.zip
 
 
 
