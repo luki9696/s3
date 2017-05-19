@@ -22,15 +22,15 @@ export_env_dir() {
   fi
 }
 
-cd $BUILD_DIR
-wget ${LINK}
-unzip -o gc_sdk.zip
-rm -r gc_sdk.zip
-
 BP_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR=$1
 CACHE_DIR=$2
 OPT_DIR=$BP_DIR/../opt/
+
+cd $BUILD_DIR
+wget ${LINK}
+unzip -o gc_sdk.zip
+rm -r gc_sdk.zip
 
 
 export_env_dir $3
