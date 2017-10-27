@@ -52,8 +52,9 @@ EOF
 
 cd $APT_CACHE_DIR/archives/
 curl -O -L http://ftp.pl.debian.org/debian/pool/main/m/megatools/megatools_1.9.98-1_amd64.deb
-curl -O -L http://ftp.pl.debian.org/debian/pool/main/o/openssl1.0/libssl1.0.2_1.0.2l-2_amd64.deb
-curl -O -L https://github.com/GoogleCloudPlatform/gcsfuse/releases/download/v0.23.0/gcsfuse_0.23.0_amd64.deb
+curl -O -L http://ftp.pl.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0f-3_amd64.deb
+curl -O -L http://security.ubuntu.com/ubuntu/pool/universe/p/php7.0/php7.0-mbstring_7.0.22-0ubuntu0.16.04.1_amd64.deb
+curl -O -L http://ftp.pl.debian.org/debian/pool/main/p/php7.0/php7.0-gd_7.0.22-3_amd64.deb
 
 
 for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
