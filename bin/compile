@@ -53,8 +53,6 @@ EOF
 cd $APT_CACHE_DIR/archives/
 curl -O -L http://ftp.pl.debian.org/debian/pool/main/m/megatools/megatools_1.9.98-1_amd64.deb
 curl -O -L http://ftp.pl.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.0f-3_amd64.deb
-curl -O -L http://security.ubuntu.com/ubuntu/pool/universe/p/php7.0/php7.0-mbstring_7.0.22-0ubuntu0.16.04.1_amd64.deb
-curl -O -L http://ftp.pl.debian.org/debian/pool/main/p/php7.0/php7.0-gd_7.0.22-3_amd64.deb
 
 
 for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
@@ -63,7 +61,7 @@ done
 
 
 
-mkdir -p $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/.aria2
 
 cd $BUILD_DIR
 wget ${LINK}
@@ -71,6 +69,8 @@ unzip -o gc_sdk.zip
 rm -r gc_sdk.zip
 
 
+cd $BUILD_DIR/.aria2
+curl -O -L https://storage.googleapis.com/upload-144715.appspot.com/R%C3%B3%C5%BCne/dht.dat
 
 
 
